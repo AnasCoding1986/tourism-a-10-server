@@ -33,32 +33,53 @@ async function run() {
 
     const spotCollection = client.db('spotDB').collection('spot');
 
-    app.get('/spot', async(req,res) => {
-        const cursor = spotCollection.find();
-        const result = await cursor.toArray();
-        res.send(result);
+    app.get('/spot', async (req, res) => {
+      const cursor = spotCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
     })
 
-    app.get('/spot/:id', async(req,res) => {
-        const id = req.params.id;
-        const query = {_id: new ObjectId(id)};
-        const spot = await spotCollection.findOne(query);
-        res.send(spot)
+    app.get('/spot/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const spot = await spotCollection.findOne(query);
+      res.send(spot)
     })
 
-    app.post('/spot', async(req,res) => {
-        const newSpot = req.body;
-        console.log(newSpot);
-        const result = await spotCollection.insertOne(newSpot);
-        res.send(result)
+    app.post('/spot', async (req, res) => {
+      const newSpot = req.body;
+      console.log(newSpot);
+      const result = await spotCollection.insertOne(newSpot);
+      res.send(result)
     })
 
-    app.put()
+    app.put('/spot/:id', async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id = new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedSpot = req.body;
+      const spot = {
+        $set: {
+          photo: updatedSpot.photo,
+          touristsSpotName: updatedSpot.touristsSpotName,
+          country: updatedSpot.country,
+          location: updatedSpot.location,
+          cost: updatedSpot.cost,
+          description: updatedSpot.description,
+          email: updatedSpot.email,
+          name: updatedSpot.name, seasonality: updatedSpot.seasonality,
+          totaVisitorsPerYear: updatedSpot.totaVisitorsPerYear,
+          travelTime: updatedSpot.travelTime,
+        }
+      }
+      const result = await spotCollection.updateOne(filter,spot,options);
+      res.send(result);
+    })
 
-    app.delete('/spot/:id', async(req,res) => {
+    app.delete('/spot/:id', async (req, res) => {
       const id = req.params.id;
       console.log(id);
-      const query = {_id: new ObjectId(id)};
+      const query = { _id: new ObjectId(id) };
       const result = await spotCollection.deleteOne(query);
       res.send(result);
     })
@@ -77,10 +98,10 @@ run().catch(console.dir);
 
 
 
-app.get('/', (req,res) => {
-    res.send('Tourism working')
+app.get('/', (req, res) => {
+  res.send('Tourism working')
 })
 
 app.listen(port, () => {
-    console.log(`waiting for success at port : ${port}`);
+  console.log(`waiting for success at port : ${port}`);
 })
