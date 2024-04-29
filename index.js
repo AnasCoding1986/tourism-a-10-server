@@ -53,6 +53,8 @@ async function run() {
         res.send(result)
     })
 
+    app.put()
+
     app.delete('/spot/:id', async(req,res) => {
       const id = req.params.id;
       console.log(id);
