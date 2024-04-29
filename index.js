@@ -55,7 +55,7 @@ async function run() {
 
     app.put('/spot/:id', async (req, res) => {
       const id = req.params.id;
-      const filter = { _id = new ObjectId(id) };
+      const filter = { _id : new ObjectId(id) };
       const options = { upsert: true };
       const updatedSpot = req.body;
       const spot = {
