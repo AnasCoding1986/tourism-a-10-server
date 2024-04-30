@@ -9,8 +9,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// tourism
-// nD7VCnB73HRRRKnq
+
 
 console.log(process.env.DB_USER);
 console.log(process.env.DB_PASS);
