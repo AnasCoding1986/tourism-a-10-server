@@ -27,6 +27,8 @@ async function run() {
     await client.connect();
 
     const spotCollection = client.db('spotDB').collection('spot');
+    const categoryCollection = client.db('spotDB').collection('categories');
+    const countriesCollection = client.db('spotDB').collection('countries');
 
     app.get('/spot', async (req, res) => {
       const cursor = spotCollection.find();
@@ -38,6 +40,32 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const spot = await spotCollection.findOne(query);
+      res.send(spot)
+    })
+
+    app.get('/categories', async (req, res) => {
+      const cursor = categoryCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
+    app.get('/categories/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const spot = await categoryCollection.findOne(query);
+      res.send(spot)
+    })
+
+    app.get('/countries', async (req, res) => {
+      const cursor = countriesCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
+    app.get('/countries/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const spot = await countriesCollection.findOne(query);
       res.send(spot)
     })
 
