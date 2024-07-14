@@ -2,11 +2,16 @@ Easy Tour
 Easy Tour is a comprehensive tourism management website focusing on a specific category of tourist spots. This project offers a seamless user experience with features such as secure authentication, dynamic tour spot listings, and a user-friendly interface.
 
 Live Site
-Explore the live site: Easy Tour
+https://mellifluous-shortbread-2e6069.netlify.app 
 
 Repositories
-Client Repository: Client Repo
-Server Repository: Server Repo
+Client Repository: 
+https://github.com/AnasCoding1986/tourism-a-10-client 
+
+Server Repository: 
+https://github.com/AnasCoding1986/tourism-a-10-server 
+
+
 Features
 Responsive Design: Optimized for mobile, tablet, and desktop views.
 User Authentication: Secure login and registration with email and password, along with social media login options.
